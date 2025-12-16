@@ -1,7 +1,8 @@
-
 from .category import Category
 from .tag import Tag
 
+from django.db import models
+from django.contrib.auth.models import User
 
 class Note(models.Model):
     """
