@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Удаление заметки{% endblock %}
+{% block page_title %}🗑️ Удаление заметки{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <h4 class="card-title mb-4">Вы уверены, что хотите удалить заметку?</h4>
+                <h5 class="text-danger mb-4">"{{ object.title }}"</h5>
+                <p class="text-muted mb-4">Это действие нельзя отменить.</p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="{% url 'note_detail' object.pk %}" class="btn btn-secondary me-md-2">
+                            ↩️ Отмена
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            🗑️ Удалить заметку
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
