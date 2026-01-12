@@ -3,7 +3,9 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+if 'PYTHONANYWHERE_DOMAIN' in os.environ:
+    # Для PythonAnywhere
+    STATIC_ROOT = '/home/kuromi/1_sem_hacaton_mast_syr/staticfiles'
 # Статические файлы
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
