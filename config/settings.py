@@ -17,11 +17,7 @@ SECRET_KEY = 'geek_masterov'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'kuromi.pythonanywhere.com',
-    'www.kuromi.pythonanywhere.com',
-    '127.0.0.1',
-    'localhost',
-    '[::1]',]
+    'kuromi.pythonanywhere.com',]
 
 # Application definition
 INSTALLED_APPS = [
