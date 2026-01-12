@@ -1,101 +1,119 @@
 {% extends 'base.html' %}
 
 {% block title %}Мои заметки{% endblock %}
-{% block page_title %}Мои заметки{% endblock %}
+
+{% block page_header %}{% endblock %}
 
 {% block content %}
-    <!-- Кнопка создания -->
-    <div class="row mb-4">
-        <div class="col">
-            <a href="{% url 'note_create' %}" class="btn btn-primary">
-                ✏️ Создать новую заметку
-            </a>
-        </div>
+<div class="d-flex justify-content-center py-4">
+  <div class="col-11 col-sm-10 col-md-10 col-lg-10 col-xl-9">
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
+      <div>
+        <h1 class="h4 fw-semibold mb-1">Мои заметки</h1>
+        <div class="text-muted">Быстрый доступ к вашим записям</div>
+      </div>
+
+      <a href="{% url 'note_create' %}" class="btn btn-primary btn-lg">
+        <i class="bi bi-plus-lg me-2"></i>Новая заметка
+      </a>
     </div>
 
-    <!-- Результаты поиска -->
     {% if is_search and query %}
-    <div class="row mb-3">
-        <div class="col">
-            <div class="alert alert-info">
-                Результаты поиска по запросу: "<strong>{{ query }}</strong>"
-                <a href="{% url 'note_list' %}" class="float-end">Показать все заметки</a>
-            </div>
+      <div class="alert alert-info d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>
+          Результаты поиска по запросу: <strong>{{ query }}</strong>
         </div>
-    </div>
+        <a class="btn btn-sm btn-outline-primary" href="{% url 'note_list' %}">
+          Сбросить фильтр
+        </a>
+      </div>
     {% endif %}
 
-    <!-- Список заметок -->
     {% if notes %}
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            {% for note in notes %}
-            <div class="col">
-                <div class="card note-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ note.title }}</h5>
-                        <p class="card-text content-preview">
-                            {{ note.get_short_content }}
-                        </p>
-                        <div class="text-muted small mb-3">
-                            <div>Создано: {{ note.created_at|date:"d.m.Y H:i" }}</div>
-                            <div>Обновлено: {{ note.updated_at|date:"d.m.Y H:i" }}</div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <a href="{% url 'note_detail' note.pk %}" class="btn btn-sm btn-outline-primary">
-                            👁️ Просмотр
-                        </a>
-                        <a href="{% url 'note_update' note.pk %}" class="btn btn-sm btn-outline-secondary">
-                            ✏️ Редактировать
-                        </a>
-                        <a href="{% url 'note_delete' note.pk %}" class="btn btn-sm btn-outline-danger">
-                            🗑️ Удалить
-                        </a>
-                    </div>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for note in notes %}
+          <div class="col">
+            <div class="card shadow-sm border-0 auth-card h-100">
+              <div class="card-body p-4">
+                <div class="d-flex align-items-start justify-content-between gap-2 mb-2">
+                  <h2 class="h6 fw-semibold mb-0 text-truncate">{{ note.title }}</h2>
+                  <i class="bi bi-journal-text text-muted"></i>
                 </div>
+
+                <div class="text-muted small mb-3">
+                  Обновлено: {{ note.updated_at|date:"d.m.Y H:i" }}
+                </div>
+
+                <p class="mb-0 text-body" style="opacity:.9;">
+                  {{ note.get_short_content }}
+                </p>
+              </div>
+
+              <div class="card-footer bg-transparent border-0 px-4 pb-4 pt-0">
+                <div class="d-flex gap-2 flex-wrap">
+                  <a href="{% url 'note_detail' note.pk %}" class="btn btn-sm btn-outline-primary">
+                    <i class="bi bi-eye me-1"></i>Просмотр
+                  </a>
+                  <a href="{% url 'note_update' note.pk %}" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-pencil-square me-1"></i>Править
+                  </a>
+                  <a href="{% url 'note_delete' note.pk %}" class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-trash3 me-1"></i>Удалить
+                  </a>
+                </div>
+              </div>
+
             </div>
-            {% endfor %}
-        </div>
+          </div>
+        {% endfor %}
+      </div>
 
-        <!-- Пагинация -->
-        {% if is_paginated %}
+      {% if is_paginated %}
         <nav class="mt-4">
-            <ul class="pagination justify-content-center">
-                {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page=1">&laquo; Первая</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
-                    </li>
-                {% endif %}
+          <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page=1">&laquo; Первая</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
+              </li>
+            {% endif %}
 
-                <li class="page-item disabled">
-                    <span class="page-link">
-                        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-                    </span>
-                </li>
+            <li class="page-item disabled">
+              <span class="page-link">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+              </span>
+            </li>
 
-                {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперед</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
-                    </li>
-                {% endif %}
-            </ul>
+            {% if page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперед</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+              </li>
+            {% endif %}
+          </ul>
         </nav>
-        {% endif %}
+      {% endif %}
 
     {% else %}
-        <!-- Сообщение, если заметок нет -->
-        <div class="text-center py-5">
-            <h3 class="text-muted mb-4">📝 У вас пока нет заметок</h3>
-            <p class="text-muted mb-4">Создайте свою первую заметку прямо сейчас!</p>
-            <a href="{% url 'note_create' %}" class="btn btn-primary btn-lg">
-                ✏️ Создать первую заметку
-            </a>
+      <div class="card shadow-lg border-0 auth-card">
+        <div class="card-body p-4 p-sm-5 text-center">
+          <div class="auth-badge mx-auto mb-3">
+            <i class="bi bi-journal-plus"></i>
+          </div>
+          <h2 class="h5 fw-semibold mb-2">Заметок пока нет</h2>
+          <div class="text-muted mb-4">Создайте первую заметку — это займёт пару секунд.</div>
+          <a href="{% url 'note_create' %}" class="btn btn-primary btn-lg">
+            <i class="bi bi-plus-lg me-2"></i>Создать первую
+          </a>
         </div>
+      </div>
     {% endif %}
+
+  </div>
+</div>
 {% endblock %}

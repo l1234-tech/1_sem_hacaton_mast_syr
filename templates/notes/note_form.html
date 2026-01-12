@@ -1,58 +1,91 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {% if object %}Редактирование заметки{% else %}Создание заметки{% endif %}
+  {% if object %}Редактирование заметки{% else %}Создание заметки{% endif %}
 {% endblock %}
 
-{% block page_title %}
-    {% if object %}✏️ Редактирование заметки{% else %}✏️ Создание заметки{% endif %}
-{% endblock %}
+{% block page_header %}{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-body">
-                <form method="post">
-                    {% csrf_token %}
-
-                    {% for field in form %}
-                    <div class="mb-3">
-                        <label for="{{ field.id_for_label }}" class="form-label">
-                            {{ field.label }}
-                        </label>
-                        {{ field }}
-                        {% if field.help_text %}
-                        <div class="form-text">{{ field.help_text }}</div>
-                        {% endif %}
-                        {% for error in field.errors %}
-                        <div class="invalid-feedback d-block">{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                    {% endfor %}
-
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                        <a href="{% if object %}{% url 'note_detail' object.pk %}{% else %}{% url 'note_list' %}{% endif %}"
-                           class="btn btn-secondary me-md-2">
-                            ↩️ Отмена
-                        </a>
-                        <button type="submit" class="btn btn-primary">
-                            {% if object %}💾 Сохранить изменения{% else %}✅ Создать заметку{% endif %}
-                        </button>
-                    </div>
-                </form>
+<div class="d-flex align-items-center justify-content-center py-4" style="min-height: calc(100vh - 160px);">
+  <div class="col-11 col-sm-10 col-md-9 col-lg-8 col-xl-7">
+    <div class="card shadow-lg border-0 auth-card">
+      <div class="card-body p-4 p-sm-5">
+        <div class="d-flex align-items-start justify-content-between gap-3 mb-4">
+          <div>
+            <h1 class="h4 mb-1 fw-semibold">
+              {% if object %}Редактирование заметки{% else %}Создание заметки{% endif %}
+            </h1>
+            <div class="text-muted">
+              {% if object %}Внесите изменения и сохраните.{% else %}Заполните поля и создайте заметку.{% endif %}
             </div>
+          </div>
+          <div class="auth-badge d-none d-sm-grid">
+            <i class="bi bi-pencil-square"></i>
+          </div>
         </div>
-    </div>
-</div>
 
-<script>
-    // Добавляем классы к полям формы
-    document.addEventListener('DOMContentLoaded', function() {
-        const inputs = document.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-            input.classList.add('form-control');
-        });
-    });
-</script>
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          {% for field in form %}
+            <div class="mb-3">
+              <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+
+              {% if field.field.widget.input_type == "textarea" %}
+                <textarea
+                  name="{{ field.html_name }}"
+                  id="{{ field.id_for_label }}"
+                  class="form-control form-control-lg {% if field.errors %}is-invalid{% endif %}"
+                  rows="10"
+                  placeholder="{{ field.field.widget.attrs.placeholder|default:'' }}"
+                >{{ field.value|default_if_none:'' }}</textarea>
+              {% else %}
+                <input
+                  type="{{ field.field.widget.input_type|default:'text' }}"
+                  name="{{ field.html_name }}"
+                  id="{{ field.id_for_label }}"
+                  class="form-control form-control-lg {% if field.errors %}is-invalid{% endif %}"
+                  value="{{ field.value|default_if_none:'' }}"
+                  {% if field.field.required %}required{% endif %}
+                  placeholder="{{ field.field.widget.attrs.placeholder|default:'' }}"
+                >
+              {% endif %}
+
+              {% if field.help_text %}
+                <div class="form-text">{{ field.help_text|safe }}</div>
+              {% endif %}
+
+              {% if field.errors %}
+                <div class="invalid-feedback d-block">
+                  {{ field.errors }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+
+          <div class="d-flex flex-column flex-sm-row gap-2 justify-content-end mt-4">
+            <a
+              href="{% if object %}{% url 'note_detail' object.pk %}{% else %}{% url 'note_list' %}{% endif %}"
+              class="btn btn-outline-secondary btn-lg"
+            >
+              Отмена
+            </a>
+
+            <button type="submit" class="btn btn-primary btn-lg">
+              {% if object %}Сохранить{% else %}Создать заметку{% endif %}
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
