@@ -4,20 +4,18 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Статические файлы
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Путь к статическим файлам
-]
-
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = 'geek_masterov'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ДОБАВЬТЕ ЭТО - ваш домен PythonAnywhere
 ALLOWED_HOSTS = [
-    'kuromi.pythonanywhere.com',]
+    'kuromi.pythonanywhere.com',  # Ваш домен на PythonAnywhere
+    '127.0.0.1',                   # Для локальной разработки
+    'localhost',                   # Для локальной разработки
+]
 
 # Application definition
 INSTALLED_APPS = [
