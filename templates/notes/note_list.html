@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Мои заметки{% endblock %}
+{% block page_title %}Мои заметки{% endblock %}
+
+{% block content %}
+    <!-- Кнопка создания -->
+    <div class="row mb-4">
+        <div class="col">
+            <a href="{% url 'note_create' %}" class="btn btn-primary">
+                ✏️ Создать новую заметку
+            </a>
+        </div>
+    </div>
+
+    <!-- Результаты поиска -->
+    {% if is_search and query %}
+    <div class="row mb-3">
+        <div class="col">
+            <div class="alert alert-info">
+                Результаты поиска по запросу: "<strong>{{ query }}</strong>"
+                <a href="{% url 'note_list' %}" class="float-end">Показать все заметки</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Список заметок -->
+    {% if notes %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for note in notes %}
+            <div class="col">
+                <div class="card note-card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ note.title }}</h5>
+                        <p class="card-text content-preview">
+                            {{ note.get_short_content }}
+                        </p>
+                        <div class="text-muted small mb-3">
+                            <div>Создано: {{ note.created_at|date:"d.m.Y H:i" }}</div>
+                            <div>Обновлено: {{ note.updated_at|date:"d.m.Y H:i" }}</div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="{% url 'note_detail' note.pk %}" class="btn btn-sm btn-outline-primary">
+                            👁️ Просмотр
+                        </a>
+                        <a href="{% url 'note_update' note.pk %}" class="btn btn-sm btn-outline-secondary">
+                            ✏️ Редактировать
+                        </a>
+                        <a href="{% url 'note_delete' note.pk %}" class="btn btn-sm btn-outline-danger">
+                            🗑️ Удалить
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Пагинация -->
+        {% if is_paginated %}
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; Первая</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                    </span>
+                </li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперед</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+
+    {% else %}
+        <!-- Сообщение, если заметок нет -->
+        <div class="text-center py-5">
+            <h3 class="text-muted mb-4">📝 У вас пока нет заметок</h3>
+            <p class="text-muted mb-4">Создайте свою первую заметку прямо сейчас!</p>
+            <a href="{% url 'note_create' %}" class="btn btn-primary btn-lg">
+                ✏️ Создать первую заметку
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}
