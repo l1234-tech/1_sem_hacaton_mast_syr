@@ -13,10 +13,10 @@
       <div class="card-body p-4 p-sm-5">
         <div class="d-flex align-items-start justify-content-between gap-3 mb-4">
           <div>
-            <h1 class="h4 mb-1 fw-semibold">
+            <h1 class="h4 mb-1 fw-semibold" style="color: #0d6efd !important;">
               {% if object %}Редактирование заметки{% else %}Создание заметки{% endif %}
             </h1>
-            <div class="text-muted">
+            <div style="color: #495057 !important;">
               {% if object %}Внесите изменения и сохраните.{% else %}Заполните поля и создайте заметку.{% endif %}
             </div>
           </div>
@@ -36,7 +36,9 @@
 
           {% for field in form %}
             <div class="mb-3">
-              <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+              <label for="{{ field.id_for_label }}" class="form-label fw-medium" style="color: #212529 !important;">
+                {{ field.label }}
+              </label>
 
               {% if field.field.widget.input_type == "textarea" %}
                 <textarea
@@ -45,6 +47,7 @@
                   class="form-control form-control-lg {% if field.errors %}is-invalid{% endif %}"
                   rows="10"
                   placeholder="{{ field.field.widget.attrs.placeholder|default:'' }}"
+                  style="border-color: #ced4da;"
                 >{{ field.value|default_if_none:'' }}</textarea>
               {% else %}
                 <input
@@ -55,6 +58,7 @@
                   value="{{ field.value|default_if_none:'' }}"
                   {% if field.field.required %}required{% endif %}
                   placeholder="{{ field.field.widget.attrs.placeholder|default:'' }}"
+                  style="border-color: #ced4da;"
                 >
               {% endif %}
 
@@ -78,7 +82,7 @@
               Отмена
             </a>
 
-            <button type="submit" class="btn btn-primary btn-lg">
+            <button type="submit" class="btn btn-primary btn-lg fw-semibold" style="background-color: #0d6efd; border-color: #0d6efd;">
               {% if object %}Сохранить{% else %}Создать заметку{% endif %}
             </button>
           </div>
