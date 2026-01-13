@@ -12,8 +12,8 @@
 
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3 mb-4">
           <div class="min-w-0">
-            <h1 class="h4 fw-semibold mb-2 text-truncate">{{ note.title }}</h1>
-            <div class="text-muted small">
+            <h1 class="h4 fw-semibold mb-2 text-truncate text-dark">{{ note.title }}</h1>
+            <div class="small" style="color: #495057 !important;">
               Создано: {{ note.created_at|date:"d.m.Y H:i" }} · Обновлено: {{ note.updated_at|date:"d.m.Y H:i" }}
             </div>
           </div>
@@ -28,7 +28,16 @@
           </div>
         </div>
 
-        <div class="note-content bg-white rounded-3 p-3 p-sm-4" style="white-space: pre-wrap; line-height: 1.7;">
+        <!-- Улучшенное содержимое заметки с лучшей читаемостью -->
+        <div class="note-content bg-white rounded-3 p-3 p-sm-4" style="
+          white-space: pre-wrap;
+          line-height: 1.8;
+          color: #212529 !important;
+          font-size: 1.05rem;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background-color: #f8f9fa !important;
+          border-left: 4px solid #0d6efd;
+        ">
           {{ note.content }}
         </div>
 

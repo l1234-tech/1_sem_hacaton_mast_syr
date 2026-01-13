@@ -9,8 +9,10 @@
       <div class="card-body p-4 p-sm-5">
         <div class="text-center mb-4">
           <div class="auth-badge mx-auto mb-3"><i class="bi bi-person-plus"></i></div>
-          <h1 class="h4 mb-1 fw-semibold">Регистрация</h1>
-          <div class="text-muted">Создайте аккаунт, чтобы сохранять заметки</div>
+          <!-- Яркий синий цвет для заголовка -->
+          <h1 class="h4 mb-1 fw-semibold" style="color: #0d6efd !important;">Регистрация</h1>
+          <!-- Изменен цвет подзаголовка -->
+          <div style="color: #495057 !important;">Создайте аккаунт, чтобы сохранять заметки</div>
         </div>
 
         {% if form.non_field_errors %}
@@ -23,7 +25,10 @@
           {% csrf_token %}
 
           <div class="mb-3">
-            <label for="{{ form.username.id_for_label }}" class="form-label">Имя пользователя</label>
+            <!-- Темный цвет для метки -->
+            <label for="{{ form.username.id_for_label }}" class="form-label fw-medium" style="color: #212529 !important;">
+              Имя пользователя
+            </label>
             <input
               type="text"
               name="{{ form.username.html_name }}"
@@ -32,6 +37,7 @@
               value="{{ form.username.value|default_if_none:'' }}"
               autocomplete="username"
               required
+              style="border-color: #ced4da;"
             >
             {% if form.username.errors %}
               <div class="invalid-feedback d-block">
@@ -41,7 +47,10 @@
           </div>
 
           <div class="mb-3">
-            <label for="{{ form.password1.id_for_label }}" class="form-label">Пароль</label>
+            <!-- Темный цвет для метки -->
+            <label for="{{ form.password1.id_for_label }}" class="form-label fw-medium" style="color: #212529 !important;">
+              Пароль
+            </label>
 
             <div class="input-group input-group-lg">
               <input
@@ -51,8 +60,9 @@
                 class="form-control {% if form.password1.errors %}is-invalid{% endif %}"
                 autocomplete="new-password"
                 required
+                style="border-color: #ced4da; border-right: 0;"
               >
-              <button class="btn btn-outline-secondary" type="button" id="togglePassword1" aria-label="Показать пароль">
+              <button class="btn btn-outline-secondary" type="button" id="togglePassword1" aria-label="Показать пароль" style="border-color: #ced4da; border-left: 0;">
                 <i class="bi bi-eye" id="togglePassword1Icon"></i>
               </button>
             </div>
@@ -63,7 +73,7 @@
               </div>
             {% endif %}
 
-            <button class="btn btn-link px-0 mt-2 small" type="button" data-bs-toggle="collapse" data-bs-target="#passwordHelp">
+            <button class="btn btn-link px-0 mt-2 small" type="button" data-bs-toggle="collapse" data-bs-target="#passwordHelp" style="color: #0d6efd !important;">
               Требования к паролю
             </button>
             <div class="collapse" id="passwordHelp">
@@ -74,7 +84,10 @@
           </div>
 
           <div class="mb-3">
-            <label for="{{ form.password2.id_for_label }}" class="form-label">Подтверждение пароля</label>
+            <!-- Темный цвет для метки -->
+            <label for="{{ form.password2.id_for_label }}" class="form-label fw-medium" style="color: #212529 !important;">
+              Подтверждение пароля
+            </label>
 
             <div class="input-group input-group-lg">
               <input
@@ -84,8 +97,9 @@
                 class="form-control {% if form.password2.errors %}is-invalid{% endif %}"
                 autocomplete="new-password"
                 required
+                style="border-color: #ced4da; border-right: 0;"
               >
-              <button class="btn btn-outline-secondary" type="button" id="togglePassword2" aria-label="Показать пароль">
+              <button class="btn btn-outline-secondary" type="button" id="togglePassword2" aria-label="Показать пароль" style="border-color: #ced4da; border-left: 0;">
                 <i class="bi bi-eye" id="togglePassword2Icon"></i>
               </button>
             </div>
@@ -97,12 +111,17 @@
             {% endif %}
           </div>
 
-          <button type="submit" class="btn btn-success btn-lg w-100 mt-2">Зарегистрироваться</button>
+          <button type="submit" class="btn btn-success btn-lg w-100 mt-2 fw-semibold" style="background-color: #198754; border-color: #198754;">
+            Зарегистрироваться
+          </button>
         </form>
 
         <div class="text-center mt-4">
-          <div class="text-muted mb-2">Уже есть аккаунт?</div>
-          <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm">Войти</a>
+          <!-- Изменен цвет текста -->
+          <div class="mb-2" style="color: #495057 !important;">Уже есть аккаунт?</div>
+          <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm fw-medium">
+            Войти
+          </a>
         </div>
       </div>
     </div>
