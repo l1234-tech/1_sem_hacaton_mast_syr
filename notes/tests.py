@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 from .models import Note
 from .forms import NoteForm
 
-
 # ==================== МОДЕЛИ ====================
 
 class NoteModelTest(TestCase):

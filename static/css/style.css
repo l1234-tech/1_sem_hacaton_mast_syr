@@ -17,12 +17,10 @@ main.container{
   padding-bottom: 24px;
 }
 
-/* Navbar чуть “дороже” */
 .navbar{
   box-shadow: 0 8px 30px rgba(0,0,0,.25);
 }
 
-/* Стеклянные карточки (пункт 5) */
 .card{
   border-radius: 14px;
   backdrop-filter: blur(8px);
@@ -35,7 +33,6 @@ main.container{
   border-top-right-radius: 14px !important;
 }
 
-/* Чуть красивее ссылки на темном фоне */
 .navbar-dark .navbar-nav .nav-link{
   opacity: .92;
 }
@@ -43,11 +40,9 @@ main.container{
   opacity: 1;
 }
 
-/* Футер текстом помягче */
 footer .text-muted{
   color: rgba(255,255,255,.55) !important;
 }
-/* Более “премиум” карточки авторизации */
 .auth-card{
   background: rgba(255,255,255,.92);
   border-radius: 18px;
@@ -73,7 +68,6 @@ footer .text-muted{
   font-size: 0.92rem;
 }
 
-/* Уменьшаем “колхозные” списки из help_text */
 .auth-help ul{
   margin: 8px 0 0 18px;
 }
@@ -81,7 +75,6 @@ footer .text-muted{
   margin: 4px 0;
 }
 
-/* Аккуратнее кнопки-глаза */
 .input-group .btn-outline-secondary{
   border-color: rgba(15, 23, 42, .18);
 }

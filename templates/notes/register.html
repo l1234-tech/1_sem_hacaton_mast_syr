@@ -9,9 +9,7 @@
       <div class="card-body p-4 p-sm-5">
         <div class="text-center mb-4">
           <div class="auth-badge mx-auto mb-3"><i class="bi bi-person-plus"></i></div>
-          <!-- Яркий синий цвет для заголовка -->
           <h1 class="h4 mb-1 fw-semibold" style="color: #0d6efd !important;">Регистрация</h1>
-          <!-- Изменен цвет подзаголовка -->
           <div style="color: #495057 !important;">Создайте аккаунт, чтобы сохранять заметки</div>
         </div>
 
@@ -25,7 +23,6 @@
           {% csrf_token %}
 
           <div class="mb-3">
-            <!-- Темный цвет для метки -->
             <label for="{{ form.username.id_for_label }}" class="form-label fw-medium" style="color: #212529 !important;">
               Имя пользователя
             </label>
@@ -47,7 +44,6 @@
           </div>
 
           <div class="mb-3">
-            <!-- Темный цвет для метки -->
             <label for="{{ form.password1.id_for_label }}" class="form-label fw-medium" style="color: #212529 !important;">
               Пароль
             </label>
@@ -84,7 +80,6 @@
           </div>
 
           <div class="mb-3">
-            <!-- Темный цвет для метки -->
             <label for="{{ form.password2.id_for_label }}" class="form-label fw-medium" style="color: #212529 !important;">
               Подтверждение пароля
             </label>
@@ -117,7 +112,6 @@
         </form>
 
         <div class="text-center mt-4">
-          <!-- Изменен цвет текста -->
           <div class="mb-2" style="color: #495057 !important;">Уже есть аккаунт?</div>
           <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm fw-medium">
             Войти

@@ -10,7 +10,6 @@
 
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
       <div>
-        <!-- Яркий синий цвет для заголовка -->
         <h1 class="h4 fw-semibold mb-1" style="color: #0d6efd !important;">Мои заметки</h1>
         <div class="text-custom-gray">Быстрый доступ к вашим записям</div>
       </div>
@@ -38,7 +37,6 @@
             <div class="card shadow-sm border-0 auth-card h-100">
               <div class="card-body p-4">
                 <div class="d-flex align-items-start justify-content-between gap-2 mb-2">
-                  <!-- Темно-синий для заголовков заметок -->
                   <h2 class="h6 fw-semibold mb-0 text-truncate" style="color: #0c63e4 !important;">{{ note.title }}</h2>
                   <i class="bi bi-journal-text" style="color: #6c757d !important;"></i>
                 </div>
@@ -107,7 +105,6 @@
           <div class="auth-badge mx-auto mb-3">
             <i class="bi bi-journal-plus"></i>
           </div>
-          <!-- Яркий синий для заголовка "Заметок пока нет" -->
           <h2 class="h5 fw-semibold mb-2" style="color: #0d6efd !important;">Заметок пока нет</h2>
           <div class="text-custom-gray mb-4">Создайте первую заметку — это займёт пару секунд.</div>
           <a href="{% url 'note_create' %}" class="btn btn-primary btn-lg">
