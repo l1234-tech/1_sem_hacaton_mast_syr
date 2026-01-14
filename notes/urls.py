@@ -14,7 +14,7 @@ urlpatterns = [
 
     # Заметки
     path('', NoteListView.as_view(), name='note_list'),
-    path('search/', views.note_search, name='note_search'),  # ← ДОБАВЛЕНО
+    path('search/', views.note_search, name='note_search'),
     path('note/new/', NoteCreateView.as_view(), name='note_create'),
     path('note/<int:pk>/', NoteDetailView.as_view(), name='note_detail'),
     path('note/<int:pk>/edit/', NoteUpdateView.as_view(), name='note_update'),

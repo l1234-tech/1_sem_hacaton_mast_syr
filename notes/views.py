@@ -11,7 +11,6 @@ from django.db.models import Q
 from .models import Note
 from .forms import NoteForm
 
-
 # ============= АУТЕНТИФИКАЦИЯ =============
 
 def register(request):

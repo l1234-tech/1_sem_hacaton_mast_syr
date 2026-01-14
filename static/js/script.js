@@ -1,5 +1,3 @@
-// Базовый JavaScript для сайта заметок
-
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Сайт заметок загружен');
 

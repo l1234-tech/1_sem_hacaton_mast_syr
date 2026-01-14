@@ -4,17 +4,15 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
 SECRET_KEY = 'geek_masterov'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ДОБАВЬТЕ ЭТО - ваш домен PythonAnywhere
+# домены
 ALLOWED_HOSTS = [
-    'kuromi.pythonanywhere.com',  # Ваш домен на PythonAnywhere
-    '127.0.0.1',                   # Для локальной разработки
-    'localhost',                   # Для локальной разработки
+    'kuromi.pythonanywhere.com',
+    '127.0.0.1',
+    'localhost',
 ]
 
 # Application definition
@@ -91,7 +89,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # Путь к статическим файлам
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Media files (загружаемые пользователями)
 MEDIA_URL = '/media/'
