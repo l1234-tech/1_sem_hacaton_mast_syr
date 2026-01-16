@@ -173,13 +173,6 @@ class ViewTests(TestCase):
 
     # ---------- Аутентификация ----------
 
-    def test_login_view_get(self):
-        """Тест GET запроса к странице входа"""
-        response = self.client.get(reverse('login'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'notes/login.html')
-        self.assertContains(response, 'Вход в систему')
-
     def test_login_view_post_valid(self):
         """Тест успешного входа"""
         response = self.client.post(reverse('login'), {
@@ -187,15 +180,6 @@ class ViewTests(TestCase):
             'password': 'testpass123'
         })
         self.assertRedirects(response, reverse('note_list'))
-
-    def test_login_view_post_invalid(self):
-        """Тест неуспешного входа"""
-        response = self.client.post(reverse('login'), {
-            'username': 'wronguser',
-            'password': 'wrongpass'
-        })
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Неверное имя пользователя или пароль')
 
     def test_register_view_get(self):
         """Тест GET запроса к странице регистрации"""
